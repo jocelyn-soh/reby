@@ -19,8 +19,10 @@ const SignUp = () => {
     } catch (e) {
       if (e.message.includes("email")) {
         setError("Email is already in use.");
+      } else if (e.message.includes("missing")){
+        setError("Missing Password");
       } else {
-        setError("Password needs at least 6 characters")
+        setError("Password needs at least 6 characters");
       }
       console.log(e.message);
     }
@@ -102,5 +104,6 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 
 
