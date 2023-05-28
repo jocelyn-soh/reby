@@ -78,6 +78,14 @@ const SignUp = () => {
             type='password'
           />
         </div>
+        {error && (
+          <div>
+            <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
+              {"Password requires at least 6 characters." }</p>
+            <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
+              {"Please try again!" }</p>
+          </div>
+        )}
         <button className='border-40px border-black-500 bg-buttonColor 
           hover:bg-buttonHoverColor w-40 h-10 mx-auto p-2 my-2 text-white text-l rounded-md flex justify-center' 
             style={{fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
@@ -90,3 +98,4 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
