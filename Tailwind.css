@@ -1,0 +1,22 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@font-face {
+    font-family: 'Raleway-Medium'; /* Choose a name for your font */
+    src: url("C:\Users\User\Desktop\NUS\Orbital\reby-main\Raleway\static\Raleway-Medium.ttf") format('truetype'); /* Update the path to your font file */
+    font-weight: normal;
+    font-style: normal;
+
+    font-family: 'Raleway-Regular'; /* Choose a name for your font */
+    src: url("C:\Users\User\Desktop\NUS\Orbital\reby-main\Raleway\static\Raleway-Regular.ttf") format('truetype'); /* Update the path to your font file */
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  .custom-button {
+    background-color: #B4AE9E; /* Replace with your specific hex color */
+    /* Add any other desired styles */
+  }
+  
+  
