@@ -5,6 +5,7 @@ import { UserAuth } from '../context/AuthContext.js';
 const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('');
   const [error, setError] = useState('')
   const { createUser } = UserAuth();
   const navigate = useNavigate()
@@ -22,38 +23,69 @@ const SignUp = () => {
   };
 
   return (
-    <div className='max-w-[700px] mx-auto my-16 p-4'>
-      <div>
-        <h1 className='text-2xl font-bold py-2'>Sign up for a free account today! </h1>
-        <p className='py-2'>
-          Already have a Reby account?{' '}
+    <React.Fragment>
+      <style>{`
+        body {
+          background-color: #FBF9F0;
+          margin: 0;
+          padding: 0;
+        }
+      `}</style>
+    <header className='border-black border-20px h-20 py-2 flex justify-center items-center' style={{backgroundColor: '#F7F4E6'}}>
+      <img
+        className="mt-10 h-10 sm:h-12 md:h-16 lg:h-20 xl:h-40"
+        src="reby-logo.png"
+        alt="Reby's logo"
+      />
+    </header>
+    <div className='h-10 w-full pl-80 flex justify-center items-center' style={{backgroundColor: '#F7F4E6', fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
+      <p className='ml-80 text-xl text-right'>
+          Already have an account?{' '}
           <Link to='/' className='underline'>
             Sign in.
           </Link>
         </p>
+    </div>
+    <div className='max-w-[700px] mx-auto my-16'>
+      <div>
+        <h1 className='text-2xl font-bold flex justify-center' style={{fontFamily:'Raleway, sans-serif', fontWeight: 500}}>GETTING STARTED </h1>
       </div>
       <form onSubmit={handleSubmit}>
         <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium'>Email Address</label>
+          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Email Address</label>
           <input
             onChange={(e) => setEmail(e.target.value)}
             className='rounded-md border p-3'
+            style={{backgroundColor:'#FFFEFB'}}
             type='email'
           />
         </div>
         <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium'>Password</label>
+          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Username</label>
+          <input
+            onChange={(e) => setUsername(e.target.value)}
+            className='rounded-md border p-3'
+            style={{backgroundColor:'#FFFEFB'}}
+            type='username'
+          />
+        </div>
+        <div className='flex flex-col py-2'>
+          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Password</label>
           <input
             onChange={(e) => setPassword(e.target.value)}
             className= 'rounded-md border p-3'
+            style={{backgroundColor:'#FFFEFB'}}
             type='password'
           />
         </div>
-        <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
-          Sign Up
+        <button className='border-40px border-black-500 bg-buttonColor 
+          hover:bg-buttonHoverColor w-40 h-10 mx-auto p-2 my-2 text-white text-l rounded-md flex justify-center' 
+            style={{fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
+          Let's Go
         </button>
       </form>
     </div>
+    </React.Fragment>
   );
 };
 
