@@ -16,7 +16,13 @@ const SignIn = () => {
       await signIn(email, password)
       navigate('/account')
     } catch (e) {
-      setError(e.message)
+      if (e.message.includes("found")) {
+        setError("User not found.");
+      } else if (e.message.includes("missing")) {
+        setError("Missing Password")
+      } else {
+        setError("Incorrect Password.")
+      }
       console.log(e.message)  
     }
   };
@@ -55,7 +61,7 @@ const SignIn = () => {
         {error && (
           <div>
             <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
-              {"Oops, your login credentials has an incorrect email and/or password :(" }</p>
+              {error}</p>
             <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
               {"Please try again!" }</p>
           </div>
@@ -72,3 +78,4 @@ const SignIn = () => {
 };
 
 export default SignIn;
+
