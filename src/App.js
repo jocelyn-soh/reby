@@ -8,32 +8,20 @@ import ProtectedRoute from './components/ProtectedRoute.js';
 
 function App() {
   return (
-    <div>
-        <img
-            className="mx-auto h-40 w-auto"
-            src="reby-logo.png"
-            alt="Reby's logo"
-      />
-
-      <h1 className='text-center text-4xl font-bold'>
-        Welcome to Reby!
-      </h1>
-  
-      <AuthContextProvider>
-        <Routes>
-          <Route path='/' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route
-            path='/account'
-            element={
-              <ProtectedRoute>
-                <Account />
-              </ProtectedRoute>
-            }
-          />
-        </Routes>
-      </AuthContextProvider>
-    </div>
+    <AuthContextProvider>
+      <Routes>
+        <Route path='/' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
+        <Route
+          path='/account'
+          element={
+            <ProtectedRoute>
+              <Account />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
+    </AuthContextProvider>
   );
 }
 
