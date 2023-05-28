@@ -8,7 +8,7 @@ const Account = () => {
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await logout(user);
       navigate('/');
       console.log('You are logged out')
     } catch (e) {
