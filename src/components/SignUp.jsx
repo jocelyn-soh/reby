@@ -23,8 +23,8 @@ const SignUp = () => {
         setError("Missing Password");
       } else {
         setError("Password needs at least 6 characters");
-      }
       console.log(e.message);
+      }
     }
   };
 
@@ -67,7 +67,7 @@ const SignUp = () => {
           />
         </div>
         <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Username</label>
+          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Username (Optional)</label>
           <input
             onChange={(e) => setUsername(e.target.value)}
             className='rounded-md border p-3'
@@ -104,6 +104,7 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 
 
 
