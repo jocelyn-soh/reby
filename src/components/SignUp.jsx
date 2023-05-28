@@ -17,7 +17,11 @@ const SignUp = () => {
       await createUser(email, password, username);
       navigate('/account')
     } catch (e) {
-      setError(e.message);
+      if (e.message.includes("email")) {
+        setError("Email is already in use.");
+      } else {
+        setError("Password needs at least 6 characters")
+      }
       console.log(e.message);
     }
   };
@@ -81,7 +85,7 @@ const SignUp = () => {
         {error && (
           <div>
             <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
-              {"Password requires at least 6 characters." }</p>
+              {error}</p>
             <p className="error-text flex justify-center" style={{color:'red', fontFamily: 'Raleway, sans-serif', fontweight: 500}}>
               {"Please try again!" }</p>
           </div>
@@ -98,4 +102,5 @@ const SignUp = () => {
 };
 
 export default SignUp;
+
 
