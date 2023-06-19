@@ -51,6 +51,7 @@ export const CreateDeck = () => {
         <div className="form-group">
           <label>Deck Name</label>
           <input
+            className='deckName'
             type="text"
             value={deckName}
             onChange={(e) => setDeckName(e.target.value)}
@@ -59,13 +60,15 @@ export const CreateDeck = () => {
         </div>
         <div className="form-group">
           <label>Front Flashcard</label>
-          <input
+            <input
+            className='flashcard'
             type="text"
             value={frontFlashcard}
             onChange={(e) => setFrontFlashcard(e.target.value)}
-          />
+            />
           <label>Back Flashcard</label>
           <input
+            className='flashcard'
             type="text"
             value={backFlashcard}
             onChange={(e) => setBackFlashcard(e.target.value)}
