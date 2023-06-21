@@ -1,0 +1,38 @@
+.container {
+    height: 60vh;
+    width: 100vw;
+    display: grid; 
+    gap: 0rem;
+    grid-template-columns: 1fr 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr; 
+}
+  
+.item { 
+    display: flex;
+    justify-content: center; 
+}
+  
+.welcome {
+    grid-column: span 2;
+    font-size: 4rem;
+    margin-top: 6.5rem;
+    margin-bottom: 0;
+    margin-left: 10rem; 
+}
+  
+.about {
+    grid-area: 2/1/3/3;
+    font-size: 1rem; 
+    margin-top: 2rem;
+    margin-left: 10rem;
+    line-height: auto;
+    text-align: justify;
+}
+  
+.image {
+    margin-top: 1rem;
+    margin-left: 0;
+    margin-right: 4rem;
+    width: 450px;
+    grid-area: 1/3/3/4; 
+}   

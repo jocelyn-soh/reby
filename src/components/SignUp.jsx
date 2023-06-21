@@ -7,24 +7,23 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
   const [error, setError] = useState('')
-  const { createUser } = UserAuth();
-  const navigate = useNavigate()
+  const { createUser, setName } = UserAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     try {
-      await createUser(email, password, username);
+      await createUser(email, password);
+      await setName(username); 
       navigate('/account')
     } catch (e) {
       if (e.message.includes("email")) {
         setError("Email is already in use.");
-      } else if (e.message.includes("missing")){
-        setError("Missing Password");
       } else {
         setError("Password needs at least 6 characters");
-      console.log(e.message);
       }
+      console.log(e.message);
     }
   };
 
@@ -47,7 +46,7 @@ const SignUp = () => {
     <div className='h-10 w-full pl-80 flex justify-center items-center' style={{backgroundColor: '#F7F4E6', fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
       <p className='ml-80 text-xl text-right'>
           Already have an account?{' '}
-          <Link to='/' className='underline'>
+          <Link to='/signin' className='underline'>
             Sign in.
           </Link>
         </p>
@@ -64,15 +63,17 @@ const SignUp = () => {
             className='rounded-md border p-3'
             style={{backgroundColor:'#FFFEFB'}}
             type='email'
+            required
           />
         </div>
         <div className='flex flex-col py-2'>
-          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Username (Optional)</label>
+          <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Username</label>
           <input
             onChange={(e) => setUsername(e.target.value)}
             className='rounded-md border p-3'
             style={{backgroundColor:'#FFFEFB'}}
             type='username'
+            required
           />
         </div>
         <div className='flex flex-col py-2'>
@@ -82,6 +83,7 @@ const SignUp = () => {
             className= 'rounded-md border p-3'
             style={{backgroundColor:'#FFFEFB'}}
             type='password'
+            required
           />
         </div>
         {error && (
@@ -93,7 +95,7 @@ const SignUp = () => {
           </div>
         )}
         <button className='border-40px border-black-500 bg-buttonColor 
-          hover:bg-buttonHoverColor w-40 h-10 mx-auto p-2 my-2 text-white text-l rounded-md flex justify-center' 
+          hover:bg-buttonHoverColor w-40 h-10 mx-auto p-2 my-2 text-white text-l rounded-md justify-center' 
             style={{fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
           Let's Go
         </button>
@@ -104,7 +106,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-
-
-
-

@@ -18,8 +18,6 @@ const SignIn = () => {
     } catch (e) {
       if (e.message.includes("found")) {
         setError("User not found.");
-      } else if (e.message.includes("missing")) {
-        setError("Missing Password")
       } else {
         setError("Incorrect Password.")
       }
@@ -52,11 +50,19 @@ const SignIn = () => {
         <form onSubmit={handleSubmit}>
         <div className='flex flex-col py-2'>
           <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Email</label>
-          <input onChange={(e) => setEmail(e.target.value)} className='border p-3 rounded-md' style={{backgroundColor:'#FBF9F0'}} type='email' />
+          <input onChange={(e) => setEmail(e.target.value)} 
+            className='border p-3 rounded-md' 
+            style={{backgroundColor:'#FBF9F0'}} 
+            type='email' 
+            required/>
         </div>
         <div className='flex flex-col py-2'>
           <label className='py-2 font-medium' style={{fontFamily:'Raleway, sans-serif', fontWeight: 600}}>Password</label>
-          <input onChange={(e) => setPassword(e.target.value)} className='border p-3 rounded-md' style={{backgroundColor:'#FBF9F0'}} type='password' />
+          <input onChange={(e) => setPassword(e.target.value)} 
+            className='border p-3 rounded-md' 
+            style={{backgroundColor:'#FBF9F0'}} 
+            type='password' 
+            required/>
         </div>
         {error && (
           <div>
