@@ -1,11 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { UserAuth } from '../context/AuthContext.js';
 import { useNavigate } from 'react-router-dom';
-import '../createDeck.css';
+import '../deck.css';
 
 const CreateDeck = ({ deckName, changeName, scrollToFlashcard, backToHome}) => {
-  const { user } = UserAuth();
-  const navigate = useNavigate();
 
   const handleCreateDeck = async (e) => {
     e.preventDefault();
