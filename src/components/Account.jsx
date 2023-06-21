@@ -46,7 +46,7 @@ const Account = () => {
         alt="Reby's logo"
       />
       <h1 className="font-bold text-3xl mx-auto mt-8" style={{fontFamily:'Raleway, sans-serif', fontWeight: 500}}>
-        What will you revise today, {user.displayName}?
+        What will you review today, {user.displayName}?
       </h1>
       <div className='h-10 mt-8 mx-auto flex justify-center items-center' >
         <button onClick={handleLogout} className='border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 my-2 text-white text-l rounded-md flex justify-center'
