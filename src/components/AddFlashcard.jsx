@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
 import { UserAuth } from '../context/AuthContext.js';
 import { collection, doc, setDoc } from 'firebase/firestore';
-import '../deck.css';
+import '../createDeck.css';
 
 const AddFlashcard = ({ deckName,backToHome }) => {
   const [frontFlashcard, setFrontFlashcard] = useState('');
