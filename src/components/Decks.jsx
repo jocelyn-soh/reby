@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
 import { UserAuth } from '../context/AuthContext.js';
 import { collection, getDocs } from 'firebase/firestore';
-import '../deck.css';
+import '../decks.css';
 
 const Decks = () => {
   const [decks, setDecks] = useState([]);
