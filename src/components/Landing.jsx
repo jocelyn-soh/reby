@@ -1,20 +1,12 @@
-import React, { useState } from "react"; 
+import React from "react"; 
 import { useNavigate } from 'react-router-dom';
 import '../landing.css';
 
 const Landing = () => {
   const navigate = useNavigate();
-  const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
+  const handleSubmit = async () => {
       navigate('/signin');
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
-    }
   };
 
   return (<React.Fragment>
