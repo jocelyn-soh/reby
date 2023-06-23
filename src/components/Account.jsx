@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext'; 
 import Decks from './Decks';
@@ -8,16 +8,9 @@ const Account = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-    try {
+  const handleSubmit = async () => {
       navigate('/createdeck');
-    } catch (e) {
-      setError(e.message);
-      console.log(e.message);
-    }
-  };
+    };
 
   const handleLogout = async () => {
     try {
