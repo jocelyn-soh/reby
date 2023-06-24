@@ -5,7 +5,6 @@ import Decks from './Decks';
 
 const Account = () => {
   const { user, logout } = UserAuth();
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const handleSubmit = async () => {
