@@ -2,14 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
 import { UserAuth } from '../context/AuthContext.js';
 import { collection, doc, setDoc } from 'firebase/firestore';
+import { useNavigate } from 'react-router-dom';
 import '../createDeck.css';
 
-const AddFlashcard = ({ deckName,backToHome }) => {
+const AddFlashcard = ({ deckName }) => {
   const [frontFlashcard, setFrontFlashcard] = useState('');
   const [backFlashcard, setBackFlashcard] = useState('');
   const { user } = UserAuth();
   const [flashcardNumber, setFlashcardNumber] = useState(1);
   const [flashcardAdded, setFlashcardAdded] = useState(false);
+  const [deckNameSaved, setDeckNameSaved] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (flashcardAdded) {
@@ -25,9 +28,12 @@ const AddFlashcard = ({ deckName,backToHome }) => {
     if (frontFlashcard.trim() === '' || backFlashcard.trim() === '') return;
 
     try {
+      setFlashcardNumber((currNum) => currNum + 1);
       const userCollectionRef = collection(firestore, user.uid);
       const documentRef = doc(userCollectionRef, deckName);
-      await setDoc(documentRef, {});
+      await setDoc(documentRef, {
+        'Total Flashcards': flashcardNumber,
+      });
       const flashcardsRef = collection(documentRef, flashcardNumber.toString());
       const frontRef = doc(flashcardsRef, 'Front');
       const backRef = doc(flashcardsRef, 'Back');
@@ -37,12 +43,30 @@ const AddFlashcard = ({ deckName,backToHome }) => {
       await setDoc(backRef, {
         Content: backFlashcard,
       });
-      setFlashcardNumber((currNum) => currNum + 1);
       setFrontFlashcard('');
       setBackFlashcard('');
       setFlashcardAdded(true);
+      setDeckNameSaved(true);
     } catch (error) {
       console.error('Error adding flashcard:', error);
+    }
+  };
+
+  const handleDeckCompleted = async (e) => {
+    e.preventDefault();
+
+    try {
+      if (!deckNameSaved) {
+        const userCollectionRef = collection(firestore, user.uid);
+        const documentRef = doc(userCollectionRef, deckName);
+        await setDoc(documentRef, {
+          'Total Flashcards': 0,
+        });
+      }
+
+      navigate('/Account');
+    } catch (error) {
+      console.error('Error completing deck:', error);
     }
   };
 
@@ -59,7 +83,7 @@ const AddFlashcard = ({ deckName,backToHome }) => {
           Add Flashcard
         </button>
         {flashcardAdded && <p className={"addedFlashcard-message"}>Flashcard has been added!</p>}
-        <button type="submit" className="deckCompleted-button" onClick={backToHome}>
+        <button type="submit" className="deckCompleted-button" onClick={handleDeckCompleted}>
           Deck Completed!
         </button>
       </form>
