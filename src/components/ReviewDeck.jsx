@@ -15,30 +15,31 @@ const ReviewDeck = () => {
   useEffect(() => {
     const fetchChooseCollection = async () => {
       try {
-        if (user && user.uid) {
+        if (user && user.uid && deckId) { 
           const numOfFlashcardsRef = doc(firestore, user.uid, deckId);
           const numOfFlashcardsDoc = await getDoc(numOfFlashcardsRef);
           const numOfFlashcards = numOfFlashcardsDoc.data()['Total Flashcards'];
-
+  
           const tempCollections = [];
-
+  
           for (let i = 1; i <= numOfFlashcards; i++) {
             const chooseRef = collection(firestore, user.uid, deckId, i.toString());
             const chooseSnapshot = await getDocs(chooseRef);
             const chooseData = chooseSnapshot.docs.map((doc) => doc.data());
-
+  
             tempCollections.push(chooseData);
           }
-
+  
           setAllCollections(tempCollections);
         }
       } catch (error) {
         console.error('Error fetching choose collection:', error);
       }
     };
-
+  
     fetchChooseCollection();
-  }, [user]);
+  }, [user, deckId]); // Include 'deckId' in the dependency array
+  
 
   const handleNextCard = () => {
     setCurrentCard((prevCard) => (prevCard === allCollections.length - 1 ? 0 : prevCard + 1));
