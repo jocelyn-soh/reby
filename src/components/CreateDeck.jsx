@@ -22,7 +22,7 @@ const DeckContainer = () => {
   }
 
   return (
-<div>
+    <div>
       <DeckName scrollToFlashcard={scrollToFlashcard} deckName={deckName} changeName={changeName} backToHome={backToHome} />
       <div ref={addFlashcardRef}>
         <AddFlashcard deckName={deckName} backToHome={backToHome} />

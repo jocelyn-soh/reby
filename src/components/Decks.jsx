@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { firestore } from '../firebase';
 import { UserAuth } from '../context/AuthContext.js';
 import { collection, getDocs } from 'firebase/firestore';
+import { Link } from 'react-router-dom';
 import '../decks.css';
 
 const Decks = () => {
@@ -15,6 +16,7 @@ const Decks = () => {
         if (user && user.uid) {
           const deckQuerySnapshot = await getDocs(collection(firestore, user.uid));
           const deckList = deckQuerySnapshot.docs.map((doc) => doc.id);
+          const numOfFlashcardInEachDeck = deckQuerySnapshot.docs.map((doc) => doc.data()['Total Flashcards']);
           setDecks(deckList);
         }
       } catch (error) {
@@ -23,21 +25,21 @@ const Decks = () => {
     };
     fetchDecks();
   }, [user]);
-  
-  
 
   return (
     <div>   
       {decks.length > 0 ? (
         <div className="grid grid-cols-5">
-        {decks.map((deck) => (
-            <div key = {deck} className="ml-2 mt-4 max-w-xs rounded overflow-hidden shadow-lg">
+        {decks.map((deckId) => (
+            <div key = {deckId} className="ml-2 mt-4 max-w-xs rounded overflow-hidden shadow-lg">
                 <img className="w-full" src="https://www.makerstations.io/content/images/2022/03/olja-lobkis-studygram-04.jpeg" alt="Study aesthetic" />
                 <div className="px-6 pt-2">
-                <div className="font-bold text-xl mb-2" >{deck}</div>
+                <div className="font-bold text-xl mb-2" >{deckId}</div>
                 </div>
                 <div className="px-6 pt-0 pb-2">
-                <button className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-md justify-center mr-2 mb-2">Review</button>
+                <Link to={`decks/review/${deckId}`} className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-md justify-center mr-2 mb-2">
+                  Review
+                </Link>
                 <button className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-md justify-center mr-2 mb-2">Edit</button>
                 </div>
             </div>))}
