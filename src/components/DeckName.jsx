@@ -1,6 +1,4 @@
 import React from 'react';
-import { UserAuth } from '../context/AuthContext.js';
-import { useNavigate } from 'react-router-dom';
 import '../createDeck.css';
 
 const CreateDeck = ({ deckName, changeName, scrollToFlashcard, backToHome}) => {

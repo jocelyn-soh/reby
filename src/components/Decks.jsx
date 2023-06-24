@@ -16,7 +16,6 @@ const Decks = () => {
         if (user && user.uid) {
           const deckQuerySnapshot = await getDocs(collection(firestore, user.uid));
           const deckList = deckQuerySnapshot.docs.map((doc) => doc.id);
-          const numOfFlashcardInEachDeck = deckQuerySnapshot.docs.map((doc) => doc.data()['Total Flashcards']);
           setDecks(deckList);
         }
       } catch (error) {
