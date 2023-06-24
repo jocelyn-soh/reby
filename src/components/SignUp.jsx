@@ -95,7 +95,7 @@ const SignUp = () => {
           </div>
         )}
         <button className='border-40px border-black-500 bg-buttonColor 
-          hover:bg-buttonHoverColor w-40 h-10 mx-auto p-2 my-2 text-white text-l rounded-md justify-center' 
+          hover:bg-buttonHoverColor w-40 h-10 mx-60 p-2 my-6 text-white text-l rounded-md justify-center' 
             style={{fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
           Let's Go
         </button>
