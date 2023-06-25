@@ -23,7 +23,7 @@ const Landing = () => {
   <hr style={{backgroundColor: 'black'}}/>
   <div className='container'>
     <h1 className='item welcome' style={{fontFamily:'Raleway, sans-serif', fontWeight: 500}}>Welcome to Reby! </h1>
-    <h2 className='item about' style={{fontFamily: 'Raleway, sans-serif', fontWeight: 500}}>Introducing レビュー, or Rebyū, which means review in Japanese, is a flashcard web application like no other. With an aesthetic and intuitive interface to create decks of flash cards, reviewing flashcards have never been so easy and productive!</h2>
+    <h2 className='item about' style={{fontFamily: 'Raleway, sans-serif', fontWeight: 500}}>Introducing レビュー, or Rebyū, which means review in Japanese, is a flashcard web application like no other. With an aesthetic and intuitive interface to create decks of flashcards, reviewing flashcards have never been so easy and productive!</h2>
     <img
       className='item image'
       src="reby-logo.png"
