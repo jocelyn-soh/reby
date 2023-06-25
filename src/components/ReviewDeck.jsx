@@ -38,7 +38,7 @@ const ReviewDeck = () => {
     };
   
     fetchChooseCollection();
-  }, [user, deckId]); // Include 'deckId' in the dependency array
+  }, [user, deckId]); 
   
 
   const handleNextCard = () => {
@@ -56,7 +56,7 @@ const ReviewDeck = () => {
   return (
     <div className="reviewContainer">
       <header className="border-black border-20px h-20 py-2 flex justify-center items-center" style={{ backgroundColor: '#F7F4E6' }}>
-        <img className="mt-10 h-10 sm:h-12 md:h-16 lg:h-20 xl:h-40" src="reby-logo.png" alt="Reby's logo" />
+        <img className="mt-2 h-10 sm:h-12 md:h-16 lg:h-20 xl:h-40" src="/reby-logo.png" alt="Reby's logo" />
       </header>
       <div className="h-2 w-full pl-80 flex justify-center items-center" style={{ backgroundColor: '#F7F4E6', fontFamily: 'Raleway, sans-serif', fontWeight: 400 }}>
         <button type="submit" className="back-button" onClick={backToHome}>
