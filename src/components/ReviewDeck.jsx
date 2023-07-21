@@ -11,6 +11,7 @@ const ReviewDeck = () => {
   const { user } = UserAuth();
   const [allCollections, setAllCollections] = useState([]);
   const [currentCard, setCurrentCard] = useState(0);
+  const [flippedCards, setFlippedCards] = useState([]);
 
   useEffect(() => {
     const fetchChooseCollection = async () => {
@@ -31,6 +32,7 @@ const ReviewDeck = () => {
           }
   
           setAllCollections(tempCollections);
+          setFlippedCards(new Array(numOfFlashcards).fill(false));
         }
       } catch (error) {
         console.error('Error fetching choose collection:', error);
@@ -39,7 +41,6 @@ const ReviewDeck = () => {
   
     fetchChooseCollection();
   }, [user, deckId]); 
-  
 
   const handleNextCard = () => {
     setCurrentCard((prevCard) => (prevCard === allCollections.length - 1 ? 0 : prevCard + 1));
@@ -53,12 +54,20 @@ const ReviewDeck = () => {
     navigate('/Account');
   };
 
+  const flipCard = (index) => {
+    setFlippedCards((prevFlippedCards) => {
+      const updatedFlippedCards = [...prevFlippedCards];
+      updatedFlippedCards[index] = !updatedFlippedCards[index];
+      return updatedFlippedCards;
+    });
+  };
+
   return (
     <div className="reviewContainer">
       <header className="border-black border-20px h-20 py-2 flex justify-center items-center" style={{ backgroundColor: '#F7F4E6' }}>
         <img className="mt-2 h-10 sm:h-12 md:h-16 lg:h-20 xl:h-40" src="/reby-logo.png" alt="Reby's logo" />
       </header>
-      <div className="h-2 w-full pl-80 flex justify-center items-center" style={{ backgroundColor: '#F7F4E6', fontFamily: 'Raleway, sans-serif', fontWeight: 400 }}>
+      <div className="h-1 w-full pl-80 flex justify-center items-center" style={{ backgroundColor: '#F7F4E6', fontFamily: 'Raleway, sans-serif', fontWeight: 400 }}>
         <button type="submit" className="back-button" onClick={backToHome}>
           Back
         </button>
@@ -71,7 +80,10 @@ const ReviewDeck = () => {
                 <div
                   key={index}
                   className={`card ${index === currentCard ? 'active' : ''}`}
-                  style={{ transform: `translateX(${(index - currentCard) * 100}%)` }}
+                  style={{
+                    transform: `translateX(${(index - currentCard) * 100}%) rotateY(${flippedCards[index] ? '180' : '0'}deg)`,
+                  }}
+                  onClick={() => flipCard(index)}
                 >
                   <div className="front">
                     {documentData && documentData[1] && (
