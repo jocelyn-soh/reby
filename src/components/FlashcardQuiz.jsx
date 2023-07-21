@@ -93,10 +93,6 @@ const FlashcardQuiz = () => {
     }
   };
 
-  const handleQuizCompletedClose = () => {
-    setShowQuizCompleted(false);
-  };
-
   return (
     <div className="reviewContainer">
       <header className="border-black border-20px h-20 py-2 flex justify-start items-center" style={{ backgroundColor: '#F7F4E6' }}>
@@ -175,8 +171,8 @@ const FlashcardQuiz = () => {
       {showQuizCompleted && (
         <div className="quizCompletedPopup">
           <div className="quizCompletedPopupInner">
-            <h2>Quiz Completed</h2>
-            <button onClick={handleQuizCompletedClose}>Close</button>
+            <p className="message">Quiz Completed!</p>
+            <button className="quizBack" onClick={backToHome}>Close</button>
           </div>
         </div>
       )}
