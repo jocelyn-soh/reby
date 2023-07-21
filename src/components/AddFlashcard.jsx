@@ -6,49 +6,38 @@ import { useNavigate } from 'react-router-dom';
 import '../createDeck.css';
 
 const AddFlashcard = ({ deckName }) => {
-  const [frontFlashcard, setFrontFlashcard] = useState('');
-  const [backFlashcard, setBackFlashcard] = useState('');
+  const [flashcards, setFlashcards] = useState([{ front: '', back: '' }]);
   const { user } = UserAuth();
-  const [flashcardNumber, setFlashcardNumber] = useState(1);
+  const [errorMessage, setErrorMessage] = useState('');
+  const [errorIndex, setErrorIndex] = useState(-1);
   const [flashcardAdded, setFlashcardAdded] = useState(false);
-  const [deckNameSaved, setDeckNameSaved] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
     if (flashcardAdded) {
       const timer = setTimeout(() => {
         setFlashcardAdded(false);
-      }, 1000);
+      }, 1200);
       return () => clearTimeout(timer);
     }
   }, [flashcardAdded]);
 
-  const handleAddFlashcard = async (e) => {
+  const handleAddFlashcard = (e) => {
     e.preventDefault();
-    if (frontFlashcard.trim() === '' || backFlashcard.trim() === '') return;
-
-    try {
-      setFlashcardNumber((currNum) => currNum + 1);
-      const userCollectionRef = collection(firestore, user.uid);
-      const documentRef = doc(userCollectionRef, deckName);
-      await setDoc(documentRef, {
-        'Total Flashcards': flashcardNumber,
-      });
-      const flashcardsRef = collection(documentRef, flashcardNumber.toString());
-      const frontRef = doc(flashcardsRef, 'Front');
-      const backRef = doc(flashcardsRef, 'Back');
-      await setDoc(frontRef, {
-        Content: frontFlashcard,
-      });
-      await setDoc(backRef, {
-        Content: backFlashcard,
-      });
-      setFrontFlashcard('');
-      setBackFlashcard('');
+    const lastFlashcard = flashcards[flashcards.length - 1];
+    if (lastFlashcard.front && lastFlashcard.back) {
+      setFlashcards((prevFlashcards) => [...prevFlashcards, { front: '', back: '' }]);
+      setErrorIndex(-1);
+      setErrorMessage('');
       setFlashcardAdded(true);
-      setDeckNameSaved(true);
-    } catch (error) {
-      console.error('Error adding flashcard:', error);
+    } else {
+      setErrorMessage('Please fill both the front and back fields before adding a new flashcard.');
+      const emptyIndex = flashcards.findIndex((flashcard) => !flashcard.front || !flashcard.back);
+      setErrorIndex(emptyIndex);
+      setTimeout(() => {
+        setErrorMessage('');
+        setErrorIndex(-1);
+      }, 2000);
     }
   };
 
@@ -56,11 +45,24 @@ const AddFlashcard = ({ deckName }) => {
     e.preventDefault();
 
     try {
-      if (!deckNameSaved) {
+      const userCollectionRef = collection(firestore, user.uid);
+      const documentRef = doc(userCollectionRef, deckName);
+      await setDoc(documentRef, {
+        'Total Flashcards': flashcards.length,
+      });
+
+      for (let i = 0; i < flashcards.length; i++) {
+        const flashcard = flashcards[i];
         const userCollectionRef = collection(firestore, user.uid);
         const documentRef = doc(userCollectionRef, deckName);
-        await setDoc(documentRef, {
-          'Total Flashcards': 0,
+        const flashcardsRef = collection(documentRef, (i + 1).toString()); // Increment index by 1
+        const frontRef = doc(flashcardsRef, 'Front');
+        const backRef = doc(flashcardsRef, 'Back');
+        await setDoc(frontRef, {
+          Content: flashcard.front,
+        });
+        await setDoc(backRef, {
+          Content: flashcard.back,
         });
       }
 
@@ -72,17 +74,46 @@ const AddFlashcard = ({ deckName }) => {
 
   return (
     <div className="deckContainer">
-      <form onSubmit={handleAddFlashcard} className="formFlashcard">
-        <div className="form-groupFlashcard">
-          <label>Front Flashcard</label>
-          <input className="flashcard" type="text" value={frontFlashcard} onChange={(e) => setFrontFlashcard(e.target.value)} required />
-          <label>Back Flashcard</label>
-          <input className="flashcard" type="text" value={backFlashcard} onChange={(e) => setBackFlashcard(e.target.value)} required/>
-        </div>
-        <button type="submit" className="addFlashcard-button">
+      <form className="formFlashcard">
+        {flashcards.map((flashcard, index) => (
+          <div
+            className={`form-groupFlashcard ${errorIndex === index ? 'error' : ''}`}
+            key={index}
+          >
+            <label>Front Flashcard</label>
+            <input
+              className="flashcard"
+              type="text"
+              value={flashcard.front}
+              onChange={(e) => {
+                const newFlashcards = [...flashcards];
+                newFlashcards[index].front = e.target.value;
+                setFlashcards(newFlashcards);
+              }}
+              required
+            />
+            <div style={{ marginTop: '1rem' }}>
+              <label>Back Flashcard</label>
+            </div>
+            <input
+              className="flashcard"
+              type="text"
+              value={flashcard.back}
+              onChange={(e) => {
+                const newFlashcards = [...flashcards];
+                newFlashcards[index].back = e.target.value;
+                setFlashcards(newFlashcards);
+              }}
+              required
+            />
+          </div>
+        ))}
+        {errorMessage && (
+          <div className="error-message">{errorMessage}</div>
+        )}
+        <button type="button" className="addFlashcard-button" onClick={handleAddFlashcard}>
           Add Flashcard
         </button>
-        {flashcardAdded && <p className={"addedFlashcard-message"}>Flashcard has been added!</p>}
         <button type="submit" className="deckCompleted-button" onClick={handleDeckCompleted}>
           Deck Completed!
         </button>
