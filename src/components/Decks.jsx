@@ -36,10 +36,25 @@ const Decks = () => {
                 <div className="font-bold text-xl mb-2" >{deckId}</div>
                 </div>
                 <div className="px-6 pt-0 pb-2">
-                <Link to={`decks/review/${deckId}`} className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-md justify-center mr-2 mb-2">
-                  Review
+                <Link to={`decks/review/${deckId}`}  type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center">
+                  <img src="review.svg" alt="review"/>
+                  <span class="sr-only">Icon description</span>
                 </Link>
-                <button className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-md justify-center mr-2 mb-2">Edit</button>
+                <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
+                  <img src="edit.svg" alt="edit"/>
+                  <span class="sr-only">Icon description</span>
+                </button>
+                <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
+                  <img src="delete-button.svg" alt="delete"/>
+                  <span class="sr-only">Icon description</span>
+                </button>
+                </div>
+                <div className="px-6 pt-0 pb-2">
+                <button className="border-0px border-black-500 bg-buttonColor w-35 h-10 mx-auto p-2 text-white text-l rounded-full inline-block justify-center mr-2 mb-2">
+                  Tag 1
+                </button>
+                <button className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-full justify-center mr-2 mb-2">Tag 2</button>
+                
                 </div>
             </div>))}
         </div>
