@@ -6,6 +6,7 @@ import Account from './components/Account';
 import Landing from './components/Landing';
 import CreateDeck from './components/CreateDeck';
 import ReviewDeck from './components/ReviewDeck';
+import FlashcardQuiz from './components/FlashcardQuiz';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -26,6 +27,7 @@ function App() {
         />
         <Route path='/createdeck' element={<CreateDeck />} />
         <Route path='/account/decks/review/:deckId' element={<ReviewDeck />} />
+        <Route path='/account/decks/review/quiz/:deckId' element={<FlashcardQuiz />} />
       </Routes>
     </AuthContextProvider>
   );
