@@ -168,3 +168,24 @@
   margin-left: 40%;
   margin-top: 20%;
 }
+
+.message {
+  font-family: Raleway, sans-serif;
+  margin-top: 2%;
+  color: #534914;
+  margin-left: 46%;
+}
+
+.quizBack {
+  margin-left: 71.5%;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  width: 6%;
+  height: 50%;
+  background-color: rgba(185, 156, 109, 0.5);
+  border: black;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: Raleway, sans-serif;
+  font-weight: 400px;
+}
