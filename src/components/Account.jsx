@@ -54,12 +54,11 @@ const Account = () => {
     <div>
 
       <form onSubmit={handleSubmit}>
-        <button className='text-xl border border-black hover:bg-black-700 hover:bg-buttonHoverColor focus:ring-4 focus:outline-none focus:ring-black-300 font-medium rounded-full text-sm p-0 text-center inline-flex items-center dark:border-blue-500 dark:text-blue-500 dark:hover:text-white dark:focus:ring-blue-800 dark:hover:bg-blue-500 float-right mr-4 mt-2' 
-          style={{fontFamily:'Raleway, sans-serif', fontWeight: 400}}>
-           <h1>&nbsp; + &nbsp;</h1>
+        <button className='text-xl border border-black hover:bg-black-700 hover:bg-buttonHoverColor font-medium rounded-full text-sm p-1 text-center inline-flex items-center float-right mr-4 mt-0'> 
+           <img src="plus.svg" />
         </button>
 
-        <h2 className="font-bold text-3xl mx-auto mt-2 ml-2" style={{fontFamily:'Raleway, sans-serif', fontWeight: 900}}>
+        <h2 className="font-bold text-3xl mx-auto mt-3 ml-2" style={{fontFamily:'Raleway, sans-serif', fontWeight: 900}}>
           My Decks 
         </h2>
       </form>
@@ -69,6 +68,11 @@ const Account = () => {
     </React.Fragment>
   );
 };
+
+export default Account;
+
+
+
 
 export default Account;
 
