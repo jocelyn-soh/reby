@@ -65,8 +65,8 @@ const FlashcardQuiz = () => {
       if (classification === null) {
         // If the user hasn't classified the last card, set it as "Still Learning"
         setClassification(false);
-        setShowQuizCompleted(true); // Display the "Quiz Completed" message
       }
+      setShowQuizCompleted(true); // Display the "Quiz Completed" message
     } else {
       setCurrentCard((prevCard) => prevCard + 1);
       setFlashcardIndex((prevIndex) => prevIndex + 1);
@@ -133,7 +133,15 @@ const FlashcardQuiz = () => {
         <div className="carousel-quiz">
           {allCollections.length > 0 ? (
             <div className="card-wrapper">
-              {allCollections.map((documentData, index) => (
+                {showQuizCompleted && (
+                <div className={`quizCompletedPopup ${showQuizCompleted ? 'open-quizCompletedPopup' : ''}`}>
+                    <h2 className="quizCompletedPopup-message">Quiz Completed!</h2>
+                    <p className="quizCompletedPopup-statistics">Still Learning : {stillLearningCount}</p>
+                    <p className="quizCompletedPopup-statistics">Know : {knowCount}</p>
+                    <button className="quizCompletedPopup-quizBack" onClick={backToHome}>Close</button>
+                </div>
+                )}
+                {allCollections.map((documentData, index) => (
                 <div
                   key={index}
                   className={`card ${index === currentCard ? 'active' : ''}`}
@@ -168,14 +176,6 @@ const FlashcardQuiz = () => {
           )}
         </div>
       </div>
-      {showQuizCompleted && (
-        <div className="quizCompletedPopup">
-          <div className="quizCompletedPopupInner">
-            <p className="message">Quiz Completed!</p>
-            <button className="quizBack" onClick={backToHome}>Close</button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
