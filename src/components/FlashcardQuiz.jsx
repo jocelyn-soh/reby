@@ -50,18 +50,16 @@ const FlashcardQuiz = () => {
 
   const handleNextCard = async () => {
     if (currentCard === allCollections.length - 1) {
-      // Last card
       if (classification === null) {
-        // If the user hasn't classified the last card, set it as "Still Learning"
         setClassification(false);
       }
-      setShowQuizCompleted(true); // Display the "Quiz Completed" message
+      setShowQuizCompleted(true);
     } else {
       setCurrentCard((prevCard) => prevCard + 1);
       setFlashcardIndex((prevIndex) => prevIndex + 1);
       setFlippedCards((prevFlippedCards) => {
         const updatedFlippedCards = [...prevFlippedCards];
-        updatedFlippedCards[currentCard] = false; // Reset the flip status for the current card
+        updatedFlippedCards[currentCard] = false; 
         return updatedFlippedCards;
       });
       setClassification(null);
@@ -86,8 +84,8 @@ const FlashcardQuiz = () => {
         if (user && user.uid && deckId) {
           const deckRef = doc(firestore, user.uid, deckId);
           await updateDoc(deckRef, {
-            StillLearningCount: arrayUnion(stillLearningCount), 
-            KnowCount: arrayUnion(knowCount),
+            "Still Learning Count": arrayUnion(stillLearningCount), 
+            "Know Count": arrayUnion(knowCount),
           });
         }
       } catch (error) {
