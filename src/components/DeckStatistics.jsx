@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import { firestore } from '../firebase';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext.js';
-import { doc, getDoc, onSnapshot } from 'firebase/firestore';
+import { doc, getDoc } from 'firebase/firestore';
 import Chart from 'chart.js/auto';
 import '../deckStatistics.css';
 
@@ -15,6 +15,7 @@ const DeckStatistics = () => {
   const chartInstance = useRef(null); 
   const [stillLearningCountArray, setStillLearningCountArray] = useState([]);
   const [knowCountArray, setKnowCountArray] = useState([]);
+  const showStillLearning = true; 
 
   useEffect(() => {
     const fetchChooseCollection = async () => {
@@ -50,12 +51,14 @@ const DeckStatistics = () => {
             borderColor: 'rgba(165, 118, 91, 1)',
             backgroundColor: 'rgba(165, 118, 91, 0.2)',
             data: stillLearningCountArray,
+            hidden: !showStillLearning, // Hide the dataset based on the toggle option
           },
           {
             label: 'Know',
             borderColor: 'rgba(221, 187, 128, 1)',
             backgroundColor: 'rgba(221, 187, 128, 0.2)',
             data: knowCountArray,
+            hidden: showStillLearning, // Hide the dataset based on the toggle option
           },
         ],
       };
@@ -97,6 +100,7 @@ const DeckStatistics = () => {
         }
       };
 
+      // If a previous chart instance exists, destroy it before creating a new one
       if (chartInstance.current) {
         chartInstance.current.destroy();
       }
