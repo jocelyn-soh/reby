@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { firestore } from '../firebase';
 import { useParams, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../context/AuthContext.js';
-import { collection, getDocs, doc, getDoc } from 'firebase/firestore';
+import { collection, getDocs, doc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 import '../carousel.css';
 
 const FlashcardQuiz = () => {
@@ -16,7 +16,8 @@ const FlashcardQuiz = () => {
   const [flippedCards, setFlippedCards] = useState([]);
   const [stillLearningCount, setStillLearningCount] = useState(0);
   const [knowCount, setKnowCount] = useState(0);
-  const [showQuizCompleted, setShowQuizCompleted] = useState(false); // To control the pop-up message
+  const [showQuizCompleted, setShowQuizCompleted] = useState(false);
+  const updateFirestoreWithCountsRef = useRef();
 
   useEffect(() => {
     const fetchChooseCollection = async () => {
@@ -47,19 +48,7 @@ const FlashcardQuiz = () => {
     fetchChooseCollection();
   }, [user, deckId]);
 
-  const handleStillLearning = () => {
-    setClassification(false);
-    handleNextCard();
-    setStillLearningCount((prevCount) => prevCount + 1);
-  };
-
-  const handleKnow = () => {
-    setClassification(true);
-    handleNextCard();
-    setKnowCount((prevCount) => prevCount + 1);
-  };
-
-  const handleNextCard = () => {
+  const handleNextCard = async () => {
     if (currentCard === allCollections.length - 1) {
       // Last card
       if (classification === null) {
@@ -78,6 +67,40 @@ const FlashcardQuiz = () => {
       setClassification(null);
     }
   };
+
+  const handleStillLearning = () => {
+    setClassification(false);
+    handleNextCard();
+    setStillLearningCount((prevCount) => prevCount + 1);
+  };
+  
+  const handleKnow = () => {
+    setClassification(true);
+    handleNextCard();
+    setKnowCount((prevCount) => prevCount + 1);
+  };
+
+  useEffect(() => {
+    updateFirestoreWithCountsRef.current = async () => {
+      try {
+        if (user && user.uid && deckId) {
+          const deckRef = doc(firestore, user.uid, deckId);
+          await updateDoc(deckRef, {
+            StillLearningCount: arrayUnion(stillLearningCount), 
+            KnowCount: arrayUnion(knowCount),
+          });
+        }
+      } catch (error) {
+        console.error('Error updating counts:', error);
+      }
+    };
+  }, [stillLearningCount, knowCount, user, deckId]);
+
+  useEffect(() => {
+    if (showQuizCompleted) {
+      updateFirestoreWithCountsRef.current();
+    }
+  }, [showQuizCompleted]);
 
   const backToHome = () => {
     navigate('/Account');
