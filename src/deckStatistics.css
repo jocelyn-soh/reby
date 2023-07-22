@@ -1,0 +1,12 @@
+.statsBack {
+    padding: 0.5rem;
+    background-color: #FBF9F0;
+    border: black;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: Raleway, sans-serif;
+    font-weight: 400px;
+    padding-left: 70px;
+    text-decoration: underline;
+    font-size: medium;
+}
