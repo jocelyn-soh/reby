@@ -7,6 +7,7 @@ import Landing from './components/Landing';
 import CreateDeck from './components/CreateDeck';
 import ReviewDeck from './components/ReviewDeck';
 import FlashcardQuiz from './components/FlashcardQuiz';
+import DeckStatistics from './components/DeckStatistics';
 import { AuthContextProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -28,6 +29,7 @@ function App() {
         <Route path='/createdeck' element={<CreateDeck />} />
         <Route path='/account/decks/review/:deckId' element={<ReviewDeck />} />
         <Route path='/account/decks/review/quiz/:deckId' element={<FlashcardQuiz />} />
+        <Route path='/account/decks/:deckId/statistics' element={<DeckStatistics />} />
       </Routes>
     </AuthContextProvider>
   );
