@@ -55,7 +55,7 @@ const Account = () => {
 
       <form onSubmit={handleSubmit}>
         <button className='text-xl border border-black hover:bg-black-700 hover:bg-buttonHoverColor font-medium rounded-full text-sm p-1 text-center inline-flex items-center float-right mr-4 mt-0'> 
-           <img src="plus.svg" />
+           <img src="plus.svg" alt="plus button" />
         </button>
 
         <h2 className="font-bold text-3xl mx-auto mt-3 ml-2" style={{fontFamily:'Raleway, sans-serif', fontWeight: 900}}>
