@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AddTags = ({ changeTags, removeTags, tags}) => {
+const AddTags = ({ changeTags, removeTags, tags, scrollToFlashcard}) => {
     
     const handleKeyDown = (e) => {
         if(e.key !== 'Enter') return
@@ -10,16 +10,31 @@ const AddTags = ({ changeTags, removeTags, tags}) => {
         e.target.value = ''
     }
 
-    return (
+    return (     
+        <div>
         <div className="tags-input-container">
-            { tags.map((tag, index) => (
-                <div className="tag-item" key={index}>
-                    <span className="text">{tag}</span>
-                    <span className="close" onClick={() => removeTags(index)}>&times;</span>
-                </div>
-            )) }
-            <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder=" Add a tag" />
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <label className="mb-10">Enter some tags.</label>
+            <div className= "border">
+                { tags.map((tag, index) => (
+                    <div className="tag-item" key={index}>
+                        <span className="text">{tag}</span>
+                        <span className="close" onClick={() => removeTags(index)}>&times;</span>
+                    </div>
+                )) }    
+                <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder=" Add a tag" />
+            </div>
+            <button type="submit" className="next-button" onClick={scrollToFlashcard}>
+                Next
+            </button>    
         </div>
+    </div>
     )
 }
 
