@@ -127,7 +127,7 @@ const FlashcardQuiz = () => {
           </div>
           <div>
             <button type="submit" className="mt-2 mr-4 h-4 w-24 sm:h-2 md:h-10 lg:h-10 xl:h-16" onClick={backToHome}>
-              <img src="/back-button.png" alt="Back" />
+              <img src="/back-button.svg" alt="Back" />
             </button>
           </div>
         </div>
