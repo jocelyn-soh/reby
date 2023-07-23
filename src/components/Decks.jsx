@@ -41,18 +41,18 @@ const Decks = () => {
                   <img src="review.svg" alt="review"/>
                   <span class="sr-only">Icon description</span>
                 </Link>
+                <Link to={`decks/review/quiz/${deckId}`} type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
+                  <img src="quiz.svg" alt="quiz"/>
+                  <span class="sr-only">Icon description</span>
+                </Link>
                 <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
                   <img src="edit.svg" alt="edit"/>
                   <span class="sr-only">Icon description</span>
                 </button>
-                <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
-                  <img src="delete-button.svg" alt="delete"/>
-                  <span class="sr-only">Icon description</span>
-                </button>
-                <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
+                <Link to={`decks/${deckId}/statistics`} type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
                   <img src="stats.svg" alt="stats"/>
                   <span class="sr-only">Icon description</span>
-                </button>
+                </Link>
                 </div>
                 <ShowTags deckId={deckId}/>                
             </div>))}
