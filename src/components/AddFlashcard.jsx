@@ -49,10 +49,8 @@ const AddFlashcard = ({ deckName, tags }) => {
       const documentRef = doc(userCollectionRef, deckName);
       await setDoc(documentRef, {
         'Total Flashcards': flashcards.length,
-      });
-      await setDoc(documentRef, {
         'Tags': tags, 
-      })
+      });
 
       for (let i = 0; i < flashcards.length; i++) {
         const flashcard = flashcards[i];
