@@ -15,9 +15,6 @@ const ShowTags = ({deckId}) => {
           const deckRef = doc(firestore, user.uid, deckId);
           const deckSnapshot = await getDoc(deckRef);
           setTagsArr(deckSnapshot.data()['Tags'] || []);
-          console.log(tagsArr);
-            // const tagsData = deckSnapshot.data();
-            // setTagsArr(tagsData['Tags']);
         }
       } catch (error) {
         console.error('Error fetching tags:', error);
