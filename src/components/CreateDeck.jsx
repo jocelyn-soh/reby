@@ -42,12 +42,9 @@ const DeckContainer = () => {
         <DeckName scrollToAddTags={scrollToAddTags} deckName={deckName} changeName={changeName} backToHome={backToHome} />
 
       <div ref={addTagsRef} className="form-group1">
-      <label className="ml-60 p-5 ">Enter some tags.</label>
+      
         <AddTags className="ml-60 p-5" scrollToFlashcard={scrollToFlashcard} tags={tags} changeTags={changeTags} removeTags={removeTags} /> 
       </div>
-      <button type="submit" className="next-button" onClick={scrollToFlashcard}>
-          Next
-        </button>
       
 
       <div ref={addFlashcardRef}>
