@@ -4,6 +4,7 @@ import { UserAuth } from '../context/AuthContext.js';
 import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import '../decks.css';
+import ShowTags from './ShowTags';
 
 const Decks = () => {
   const [decks, setDecks] = useState([]);
@@ -48,18 +49,16 @@ const Decks = () => {
                   <img src="delete-button.svg" alt="delete"/>
                   <span class="sr-only">Icon description</span>
                 </button>
-                </div>
-                <div className="px-6 pt-0 pb-2">
-                <button className="border-0px border-black-500 bg-buttonColor w-35 h-10 mx-auto p-2 text-white text-l rounded-full inline-block justify-center mr-2 mb-2">
-                  Tag 1
+                <button type="button" class="border border-black hover:bg-black-700 hover:bg-buttonHoverColor rounded-full text-sm p-1 inline-flex items-center ml-1">
+                  <img src="stats.svg" alt="stats"/>
+                  <span class="sr-only">Icon description</span>
                 </button>
-                <button className="border-0px border-black-500 bg-buttonColor hover:bg-buttonHoverColor w-35 h-10 mx-auto p-2 text-white text-l rounded-full justify-center mr-2 mb-2">Tag 2</button>
-                
                 </div>
+                <ShowTags deckId={deckId}/>                
             </div>))}
         </div>
     ) : (
-        <p className="noDecks text-xl mt-40 text-center">No decks yet...start creating your first deck!</p>
+        <p className="noDecks text-xl mt-40 text-center" >No decks yet...start creating your first deck!</p>
     )}
     </div>
   );
