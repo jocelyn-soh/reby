@@ -5,7 +5,7 @@ import { collection, doc, setDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 import '../createDeck.css';
 
-const AddFlashcard = ({ deckName }) => {
+const AddFlashcard = ({ deckName, tags }) => {
   const [flashcards, setFlashcards] = useState([{ front: '', back: '' }]);
   const { user } = UserAuth();
   const [errorMessage, setErrorMessage] = useState('');
@@ -50,6 +50,9 @@ const AddFlashcard = ({ deckName }) => {
       await setDoc(documentRef, {
         'Total Flashcards': flashcards.length,
       });
+      await setDoc(documentRef, {
+        'Tags': tags, 
+      })
 
       for (let i = 0; i < flashcards.length; i++) {
         const flashcard = flashcards[i];
