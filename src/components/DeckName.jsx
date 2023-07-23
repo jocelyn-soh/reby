@@ -1,7 +1,7 @@
 import React from 'react';
 import '../createDeck.css';
 
-const CreateDeck = ({ deckName, changeName, scrollToFlashcard, backToHome}) => {
+const CreateDeck = ({ deckName, changeName, scrollToAddTags, scrollToFlashcard, backToHome}) => {
 
   const handleCreateDeck = async (e) => {
     e.preventDefault();
@@ -27,12 +27,16 @@ const CreateDeck = ({ deckName, changeName, scrollToFlashcard, backToHome}) => {
           <label>Please enter a deck name.</label>
           <input className="deckName" type="text" value={deckName} onChange={(e) => changeName(e.target.value)} placeholder="Deck Name" required />
         </div>
-        <button type="submit" className="submit-button" onClick={scrollToFlashcard}>
-          Create Deck
+        <button type="submit" className="submit-button" onClick={scrollToAddTags}>
+          Next
         </button>
+        
       </form>
+
+      
+      
     </div>
-  );
+  )
 };
 
 export default CreateDeck;
